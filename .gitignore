@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+sftp-config.json
+**/exp_root
+wandb/
+experiments/
+experiments_iht/
