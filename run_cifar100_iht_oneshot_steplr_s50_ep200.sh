@@ -19,6 +19,7 @@ python main.py \
         --manual_seed=${manual_seed[j]} \
 	--experiment_root_path "./experiments_iht" \
 	--exp_name=cifar100_wideresnet \
+	--use_wandb false \
         --wandb_project "cifar100_wideresnet" 
 
 done
