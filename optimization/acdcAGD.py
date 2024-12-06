@@ -70,6 +70,19 @@ class acdcAGD(Optimizer):
         #self.sparsifyInterval = sparsifyInterval
         self.specificSteps = 0
 
+
+        # ###
+        elf.iteration = 0
+        self.trialNumber = None
+        self.testAccuracy = None
+
+        self.loggingInterval = 100
+
+        # Varaibles specific to certain classes
+        self.currentDataBatch = None
+
+        self.dealWithKwargs(kwargs)
+
         # Compression, Decompression and Freezing Variables
 
         ## CIFAR10
@@ -283,6 +296,18 @@ class acdcAGD(Optimizer):
             for p in self.paramsIter():
                 state = self.state[p]
                 state['xt'] = p.data.clone().detach()
+
+    """ Desc: when we add extra kwargs that aren't recognized, we add them to our variables by default"""
+    def dealWithKwargs(self,keywordArgs):
+        for key, value in keywordArgs.items():
+            setattr(self, key, value)
+
+    """ Desc: use it like 'for i in paramsIterator():' """
+
+    def paramsIter(self):
+        for group in self.param_groups:
+            for p in group['params']:
+                yield p
 
 
 
