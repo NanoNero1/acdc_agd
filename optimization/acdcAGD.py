@@ -290,7 +290,7 @@ class acdcAGD(Optimizer):
                 #criterion = torch.nn.CrossEntropyLoss()
                 #loss = criterion(newOutput,target)
                 #loss = F.cross_entropy(newOutput.to(self.device), target.to(self.device), reduction='sum').item()
-                loss = F.cross_entropy(newOutput.to(self.device), target.to(self.device))
+                loss = F.cross_entropy(newOutput.to(self.device), target)
                 # ACDC loss!!! F.cross_entropy(output, target, reduction='sum').item()
                 #loss = F.nll_loss(newOutput, target)
                 loss.backward()
