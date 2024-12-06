@@ -8,6 +8,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from optimization.sgd import SGD
+from optimization.acdcAGD import acdcAGD
 # from torch.optim import *
 from torch.optim.lr_scheduler import *
 from torch.cuda.amp import autocast
@@ -36,7 +37,13 @@ def build_optimizer_from_config(model, optimizer_config):
         optimizer_args['params'] = params
     else:
        optimizer_args['params'] = model.parameters()
-    optimizer = globals()[optimizer_class](**optimizer_args)
+
+
+    doAGD = True
+    if doAGD:
+        optimizer = globals()[optimizer_class](**optimizer_args)
+    else:
+        optimizer = acdcAGD(**optimizer_args)
 
     if 'swa_start' in optimizer_config.keys():
         optimizer = torchcontrib.optim.SWA(optimizer, swa_start=optimizer_config['swa_start'],
@@ -150,8 +157,8 @@ class TrainingPolicy(PolicyBase):
 
 
             # Dimitri code
-            if optimizer.name == "iht_agd":
-                self.optimizer.myModel = self.model
+            if optimizer.secretname == "iht_agd":
+                self.optimizer.model = self.model
             
 
             self.optimizer.step()
