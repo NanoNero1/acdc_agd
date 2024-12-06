@@ -66,6 +66,11 @@ def build_training_policy_from_config(model, scheduler_dict, trainer_name, use_l
     trainer_dict = scheduler_dict['trainers'][trainer_name]
     optimizer = build_optimizer_from_config(model, trainer_dict['optimizer'])
     lr_scheduler, epochs = build_lr_scheduler_from_config(optimizer, trainer_dict['lr_scheduler'])
+
+    # Dimitri code
+    if optimizer.secretname == "iht_agd":
+        optimizer.model = model
+
     return TrainingPolicy(model, optimizer, lr_scheduler, epochs,
         use_jsd=use_jsd, num_splits=num_splits, fp16_scaler=fp16_scaler)
 
@@ -125,6 +130,11 @@ class TrainingPolicy(PolicyBase):
         self.optimizer.zero_grad()
         in_tensor, target = minibatch
 
+        # Dimitri code
+        if self.optimizer.secretname == "iht_agd":
+                self.currentDataBatch = minibatch
+                #self.optimizer.model = self.model
+
         if hasattr(self, 'jsd_loss'):
             in_tensor = torch.cat(in_tensor)
             target = torch.cat(self.num_splits*[target])
@@ -155,12 +165,7 @@ class TrainingPolicy(PolicyBase):
         else:
             loss.backward()
 
-
-            # Dimitri code
-            if self.optimizer.secretname == "iht_agd":
-                self.optimizer.model = self.model
-            
-
+            # For agd here the optimizer does another gradient update
             self.optimizer.step()
 
 
