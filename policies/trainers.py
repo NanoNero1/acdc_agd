@@ -75,6 +75,8 @@ class TrainingPolicy(PolicyBase):
         if fp16_scaler is not None:
             self.enable_autocast = True
 
+        self.currBatch = None
+
         print("initial optim lr", self.optim_lr)
 
         self.use_jsd = use_jsd
@@ -93,6 +95,9 @@ class TrainingPolicy(PolicyBase):
                 in_tensor, target = in_tensor.to(device), target.to(device)
                 with autocast(enabled=self.enable_autocast):
                     output = self.model(in_tensor)
+
+                    # Dimitri code
+                    self.optimizer.currBatch = in_tensor
                     eval_loss += F.cross_entropy(output, target, reduction='sum').item()
                 pred = output.argmax(dim=1, keepdim=True)
                 correct += pred.eq(target.view_as(pred)).sum().item()
@@ -142,6 +147,13 @@ class TrainingPolicy(PolicyBase):
             self.fp16_scaler.update()
         else:
             loss.backward()
+
+
+            # Dimitri code
+            if optimizer.name == "iht_agd":
+                self.optimizer.myModel = self.model
+            
+
             self.optimizer.step()
 
 

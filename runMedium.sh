@@ -1,7 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=myjob         # create a short name for your job
-#SBATCH --nodes=1             # node count
-#SBATCH --ntasks=1               # total number of tasks across all nodes
+#!ATCH --ntasks=1               # total number of tasks across all nodes
 ##SBATCH --mem=16G
 #SBATCH --time=30-00:00:00
 ##SBATCH --cpus-per-task=16
@@ -31,4 +28,7 @@ python main.py \
 	--exp_name=cifar100_wideresnet 
 
 
-## --gpu!!!!!!
+## --gpu!!!!!!/bin/bash
+#SBATCH --job-name=myjob         # create a short name for your job
+#SBATCH --nodes=1             # node count
+#SB
