@@ -132,8 +132,8 @@ class TrainingPolicy(PolicyBase):
 
         # Dimitri code
         if self.optimizer.secretname == "iht_agd":
-                self.currentDataBatch = minibatch
-                #self.optimizer.model = self.model
+            self.optimizer.currentDataBatch = minibatch
+            #self.optimizer.model = self.model
 
         if hasattr(self, 'jsd_loss'):
             in_tensor = torch.cat(in_tensor)
