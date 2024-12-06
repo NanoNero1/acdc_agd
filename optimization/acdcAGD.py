@@ -81,7 +81,7 @@ class acdcAGD(Optimizer):
         # Varaibles specific to certain classes
         self.currentDataBatch = None
 
-        self.dealWithKwargs(kwargs)
+        #self.dealWithKwargs(kwargs)
 
         # Compression, Decompression and Freezing Variables
 
