@@ -157,7 +157,7 @@ class TrainingPolicy(PolicyBase):
 
 
             # Dimitri code
-            if optimizer.secretname == "iht_agd":
+            if self.optimizer.secretname == "iht_agd":
                 self.optimizer.model = self.model
             
 
