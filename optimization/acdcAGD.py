@@ -63,6 +63,52 @@ class acdcAGD(Optimizer):
         self.initial_lr = lr
         self.secretname = "iht_agd"
 
+
+        self.beta = 10.0
+        self.kappa = 10.0
+
+        #self.sparsifyInterval = sparsifyInterval
+        self.specificSteps = 0
+
+        # Compression, Decompression and Freezing Variables
+
+        ## CIFAR10
+        self.phaseLength = 10
+        self.compressionRatio = 0.5
+        self.freezingRatio = 0.2
+        self.warmupLength = 6
+        self.startFineTune = 50
+
+        self.methodName = "iht_AGD"
+        self.alpha = self.beta / self.kappa
+
+        self.specificSteps = 0
+
+        self.areWeCompressed = False
+        self.notFrozenYet = True
+
+        self.batchIndex = 0
+
+        # State Initialization
+        for p in self.paramsIter():
+            state = self.state[p]
+            state['xt_frozen'] = torch.ones_like(p)
+            state['xt_gradient'] = torch.zeros_like(p)
+
+
+        # Objective Function Property Variables
+        self.alpha = self.beta / self.kappa
+        self.sqKappa = pow(self.kappa,0.5)
+        self.loss_zt = 0.0
+
+
+        for p in self.paramsIter():
+            state = self.state[p]
+
+            state['zt'] = torch.zeros_like((p.to(self.device)))
+            state['xt'] = p.data.detach().clone()
+            state['zt_oldGrad'] = torch.zeros_like((p.to(self.device)))
+
     @torch.no_grad()
     def reset_momentum_buffer(self):
         print("resetting momentum")
