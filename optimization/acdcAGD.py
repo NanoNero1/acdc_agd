@@ -77,7 +77,7 @@ class acdcAGD(Optimizer):
         self.testAccuracy = None
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         print(self.device)
-        abort()
+        #abort()
 
         self.loggingInterval = 100
 
@@ -289,7 +289,7 @@ class acdcAGD(Optimizer):
                 newOutput = self.model(data)
                 #criterion = torch.nn.CrossEntropyLoss()
                 #loss = criterion(newOutput,target)
-                loss = F.cross_entropy(newOutput, target, reduction='sum').item()
+                loss = F.cross_entropy(newOutput.to(self.device), target.to(self.device), reduction='sum').item()
                 # ACDC loss!!! F.cross_entropy(output, target, reduction='sum').item()
                 #loss = F.nll_loss(newOutput, target)
                 loss.backward()
