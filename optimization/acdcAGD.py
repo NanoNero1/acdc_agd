@@ -76,6 +76,8 @@ class acdcAGD(Optimizer):
         self.trialNumber = None
         self.testAccuracy = None
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        print(self.device)
+        abort()
 
         self.loggingInterval = 100
 
