@@ -60,7 +60,7 @@ class SGD(Optimizer):
             raise ValueError("Nesterov momentum requires a momentum and zero dampening")
         super(SGD, self).__init__(params, defaults)
         self.initial_lr = lr
-        self.secretname == "sgd"
+        self.secretname = "sgd"
 
     @torch.no_grad()
     def reset_momentum_buffer(self):
