@@ -1,3 +1,4 @@
+#!/bin/bash
 #SBATCH --ntasks=1               # total number of tasks across all nodes
 ##SBATCH --mem=16G
 #SBATCH --time=30-00:00:00
