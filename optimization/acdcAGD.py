@@ -72,7 +72,7 @@ class acdcAGD(Optimizer):
 
 
         # ###
-        elf.iteration = 0
+        self.iteration = 0
         self.trialNumber = None
         self.testAccuracy = None
 
