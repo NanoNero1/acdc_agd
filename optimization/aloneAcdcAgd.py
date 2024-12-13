@@ -116,6 +116,9 @@ class aloneAcdcAgd(Optimizer):
         # TO-DO decide what stage we are in 
         phase = self.getCurrentPhase()
 
+        print(phase)
+        abort()
+
         self.iteration += 1
         print(self.iteration)
         print('does this print')
@@ -144,7 +147,7 @@ class aloneAcdcAgd(Optimizer):
                         self.freeze(iterate='xt')
                         abort()
                         print('hello')
-                        
+
                     else:
                         # Re-freeze ZT
                         self.refreeze(iterate='xt')
