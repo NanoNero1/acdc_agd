@@ -187,6 +187,7 @@ class aloneAcdcAgd(Optimizer):
                 p.data[torch.abs(p) <= cutoff] = 0.0
             else:
                 (state[iterate])[torch.abs(state[iterate]) <= cutoff] = 0.0
+                print("!!!!!!!!!!! this should sparsify the params, IN THIS CASE X_T!!!!")
   
     def refreeze(self,iterate=None):
         for p in self.paramsIter():
