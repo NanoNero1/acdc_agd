@@ -123,6 +123,9 @@ class aloneAcdcAgd(Optimizer):
                 # -modify sparsify, refreeze, freeze
 
 
+                print("this is the standalone version")
+
+
                 state = self.state[p]
 
                 state['zt_oldGrad'] = p.grad.clone().detach()
