@@ -117,7 +117,7 @@ class aloneAcdcAgd(Optimizer):
         phase = self.getCurrentPhase()
 
         print(phase)
-        abort()
+        #abort()
 
         self.iteration += 1
         print(self.iteration)
@@ -145,8 +145,9 @@ class aloneAcdcAgd(Optimizer):
                     if self.notFrozenYet == True:
                         # Freeze X_T
                         self.freeze(iterate='xt')
-                        abort()
+                        #abort()
                         print('hello')
+                        abort()
 
                     else:
                         # Re-freeze ZT
@@ -233,6 +234,7 @@ class aloneAcdcAgd(Optimizer):
             phase = "dense"
         else:
             print("Error, iteration logic is incorrect")
+        return phase
 
 
     ###################################  UTILITY FUNCTIONS  ################################################
