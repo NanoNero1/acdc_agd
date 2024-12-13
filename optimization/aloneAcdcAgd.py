@@ -114,6 +114,9 @@ class aloneAcdcAgd(Optimizer):
         # TO-DO decide what stage we are in 
         phase = self.getCurrentPhase()
 
+        self.iteration += 1
+        print(self.iteration)
+
 
         with torch.no_grad():
             for p in self.paramsIter():       
