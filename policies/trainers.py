@@ -39,7 +39,7 @@ def build_optimizer_from_config(model, optimizer_config):
        optimizer_args['params'] = model.parameters()
 
 
-    doAGD = True
+    doAGD = False
     if doAGD:
         optimizer = acdcAGD(**optimizer_args)   
     else:  
