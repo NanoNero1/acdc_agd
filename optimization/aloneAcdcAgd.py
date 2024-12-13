@@ -49,6 +49,8 @@ class aloneAcdcAgd(Optimizer):
 
         #self.dealWithKwargs(kwargs)
 
+        self.sparsity = 0.70
+
         # Compression, Decompression and Freezing Variables
 
         ## CIFAR10
