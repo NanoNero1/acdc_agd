@@ -142,7 +142,9 @@ class aloneAcdcAgd(Optimizer):
                     if self.notFrozenYet == True:
                         # Freeze X_T
                         self.freeze(iterate='xt')
+                        abort()
                         print('hello')
+                        
                     else:
                         # Re-freeze ZT
                         self.refreeze(iterate='xt')
