@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 from optimization.sgd import SGD
 from optimization.acdcAGD import acdcAGD
+from optimization.aloneAcdcAgd import aloneAcdcAgd
 # from torch.optim import *
 from torch.optim.lr_scheduler import *
 from torch.cuda.amp import autocast
@@ -44,6 +45,9 @@ def build_optimizer_from_config(model, optimizer_config):
         optimizer = acdcAGD(**optimizer_args)   
     else:  
         optimizer = globals()[optimizer_class](**optimizer_args)
+
+
+    optimizer = aloneAcdcAgd(**optimizer_args) 
 
     if 'swa_start' in optimizer_config.keys():
         optimizer = torchcontrib.optim.SWA(optimizer, swa_start=optimizer_config['swa_start'],
