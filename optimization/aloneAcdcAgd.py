@@ -149,11 +149,14 @@ class aloneAcdcAgd(Optimizer):
                         self.freeze(iterate='xt')
                         #abort()
                         print('hello')
+                        self.notFrozenYet = False
                     else:
                         # Re-freeze ZT
                         self.refreeze(iterate='xt')
                         print("hello2")
                         abort()
+                else:
+                    self.notFrozenYet = True
 
                 # Find the new z_t
                 ztPlus = (state['zt_old'] - (state['zt_oldGrad'] / self.beta) )
