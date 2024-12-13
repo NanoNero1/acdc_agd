@@ -54,11 +54,11 @@ class aloneAcdcAgd(Optimizer):
         # Compression, Decompression and Freezing Variables
 
         ## CIFAR10
-        self.phaseLength = 10
+        self.phaseLength = 100
         self.compressionRatio = 0.5
         self.freezingRatio = 0.2
-        self.warmupLength = 6
-        self.startFineTune = 50
+        self.warmupLength = 60
+        self.startFineTune = 100000
 
         self.methodName = "iht_AGD"
         self.alpha = self.beta / self.kappa
@@ -154,7 +154,7 @@ class aloneAcdcAgd(Optimizer):
                         # Re-freeze ZT
                         self.refreeze(iterate='xt')
                         print("hello2")
-                        abort()
+                        #abort()
                 else:
                     self.notFrozenYet = True
 
