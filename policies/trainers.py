@@ -44,10 +44,11 @@ def build_optimizer_from_config(model, optimizer_config):
     if doAGD:
         optimizer = acdcAGD(**optimizer_args)   
     else:  
-        optimizer = globals()[optimizer_class](**optimizer_args)
+        optimizer = aloneAcdcAgd(**optimizer_args) 
+        #optimizer = globals()[optimizer_class](**optimizer_args)
 
 
-    optimizer = aloneAcdcAgd(**optimizer_args) 
+    
 
     if 'swa_start' in optimizer_config.keys():
         optimizer = torchcontrib.optim.SWA(optimizer, swa_start=optimizer_config['swa_start'],
