@@ -80,6 +80,8 @@ class aloneAcdcAgd(Optimizer):
         self.sqKappa = pow(self.kappa,0.5)
         self.loss_zt = 0.0
 
+        
+        print("this is the standalone version")
 
         for p in self.paramsIter():
             state = self.state[p]
@@ -126,9 +128,6 @@ class aloneAcdcAgd(Optimizer):
                 # -modify sparsify, refreeze, freeze
 
 
-                print("this is the standalone version")
-
-
                 state = self.state[p]
 
                 state['zt_oldGrad'] = p.grad.clone().detach()
@@ -142,6 +141,7 @@ class aloneAcdcAgd(Optimizer):
                     if self.notFrozenYet == True:
                         # Freeze X_T
                         self.freeze(iterate='xt')
+                        print('hello')
                     else:
                         # Re-freeze ZT
                         self.refreeze(iterate='xt')
