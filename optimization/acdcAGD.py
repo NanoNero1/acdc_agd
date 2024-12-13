@@ -148,10 +148,6 @@ class acdcAGD(Optimizer):
     @torch.no_grad()
     def step(self, closure=None):
 
-        self.iteration += 1
-        print(self.iteration)
-
-
 
         # TO-DO decide what stage we are in 
         phase = self.getCurrentPhase()

@@ -118,6 +118,7 @@ class aloneAcdcAgd(Optimizer):
 
         self.iteration += 1
         print(self.iteration)
+        print('does this print')
 
 
         with torch.no_grad():
